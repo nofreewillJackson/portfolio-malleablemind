@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/j-garden/(.*)",
+      "destination": "https://publish.obsidian.md/serve?url=malleablemind.ai/j-garden/$1"
+    }
+  ]
+}
