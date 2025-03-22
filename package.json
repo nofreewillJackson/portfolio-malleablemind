@@ -2,7 +2,7 @@
   "name": "my-portfolio",
   "private": true,
   "version": "0.0.0",
-  "homepage": "bruh.com",
+  "homepage": "malleablemind.ai",
   "type": "module",
   "scripts": {
     "dev": "vite",

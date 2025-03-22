@@ -1,0 +1,136 @@
+{
+  "chapter1": [
+    {
+      "question": "What is software engineering?",
+      "answer": "Software engineering is an engineering discipline that involves all aspects of software production, from system specification to maintenance, using appropriate theories, methods, and tools. It includes project management and takes into account organizational and financial constraints."
+    },
+    {
+      "question": "Why is software engineering important?",
+      "answer": "Software engineering is important because modern society relies heavily on complex software systems that need to be reliable, trustworthy, and efficient. Using software engineering methods reduces long-term costs, especially during maintenance, and ensures that systems are maintainable, dependable, efficient, and acceptable."
+    },
+    {
+      "question": "What are the essential attributes of good software?",
+      "answer": "The essential attributes of good software are maintainability, dependability and security, efficiency, and acceptability. Software should be easy to update, reliable, secure, resource-efficient, and usable."
+    },
+    {
+      "question": "What are the fundamental activities in software processes?",
+      "answer": "The fundamental activities in software processes are software specification (defining the system and constraints), software development (designing and programming), software validation (ensuring the software meets user needs), and software evolution (modifying software to meet new requirements)."
+    },
+    {
+      "question": "What challenges do software engineers face?",
+      "answer": "Software engineers face challenges such as heterogeneity (building systems across diverse platforms), business and social change (adapting to new technologies and changing markets), security and trust (ensuring system reliability and safety), and scale (developing for both small and large-scale systems)."
+    },
+    {
+      "question": "What are some types of software applications?",
+      "answer": "Types of software applications include stand-alone applications, interactive transaction-based systems, embedded control systems, batch processing systems, entertainment systems, systems for modeling and simulation, data collection systems, and systems of systems."
+    },
+    {
+      "question": "What are the fundamental principles of software engineering?",
+      "answer": "The fundamental principles of software engineering are to develop systems using a managed process, prioritize dependability and performance, understand and manage requirements, and reuse existing software whenever possible."
+    },
+    {
+      "question": "What is software engineering ethics?",
+      "answer": "Software engineering ethics is about adhering to moral principles that ensure responsible, professional behavior. This includes confidentiality, competence, respecting intellectual property rights, and avoiding computer misuse."
+    },
+    {
+      "question": "What is the ACM/IEEE code of ethics?",
+      "answer": "The ACM/IEEE code of ethics is a set of eight ethical principles for software engineers, which include acting in the public interest, working in the best interest of clients and employers, ensuring product quality, maintaining professional judgment, promoting ethical management, upholding the profession, supporting colleagues, and engaging in lifelong learning."
+    }
+  ],
+  "chapter2": [
+    {
+      "question": "What is a software process?",
+      "answer": "A software process is a structured set of activities required to develop a software system. The key activities include specification, design and implementation, validation, and evolution."
+    },
+    {
+      "question": "What are the main software process models?",
+      "answer": "The main software process models are the waterfall model, incremental development, and integration and configuration. The waterfall model is plan-driven, while incremental development and integration and configuration can be either plan-driven or agile."
+    },
+    {
+      "question": "What is the difference between plan-driven and agile processes?",
+      "answer": "Plan-driven processes involve detailed upfront planning, while agile processes use incremental planning to adapt to changing customer requirements. Most real-world software processes are a mix of both approaches."
+    },
+    {
+      "question": "What are the phases of the waterfall model?",
+      "answer": "The phases of the waterfall model are requirements analysis and definition, system and software design, implementation and unit testing, integration and system testing, and operation and maintenance."
+    },
+    {
+      "question": "What are the benefits and problems of incremental development?",
+      "answer": "The benefits of incremental development include reduced cost of change, easier customer feedback, and faster delivery. Problems include reduced process visibility and potential degradation of system structure over time."
+    },
+    {
+      "question": "What are the benefits and drawbacks of integration and configuration?",
+      "answer": "The benefits of integration and configuration are reduced cost and faster delivery due to component reuse. Drawbacks include potential requirements compromises and loss of control over the evolution of reused components."
+    },
+    {
+      "question": "What is prototyping and why is it used?",
+      "answer": "Prototyping involves creating an initial version of a system to test concepts and design options. It helps manage change by providing early feedback and reducing risks in design decisions."
+    },
+    {
+      "question": "What is the process improvement cycle?",
+      "answer": "The process improvement cycle involves measuring current processes, analyzing their effectiveness, and making changes to improve software quality, reduce costs, and accelerate development."
+    },
+    {
+      "question": "What is the Capability Maturity Model (CMM)?",
+      "answer": "The Capability Maturity Model (CMM) is a framework that assesses the maturity of software processes. The levels are Initial, Repeatable, Defined, Managed, and Optimizing."
+    },
+    {
+      "question": "What are the key principles of agile development?",
+      "answer": "Key principles of agile development include customer involvement, incremental delivery, prioritizing individuals and interactions over processes and tools, embracing change, and maintaining simplicity in design."
+    },
+    {
+      "question": "What are the main practices of Extreme Programming (XP)?",
+      "answer": "The main practices of XP are incremental planning, small releases, simple design, test-first development, refactoring, pair programming, collective ownership, continuous integration, sustainable pace, and on-site customer collaboration."
+    },
+    {
+      "question": "What is Scrum?",
+      "answer": "Scrum is an agile framework for managing iterative development. It involves short cycles called sprints, a product backlog of prioritized features, a ScrumMaster to facilitate the process, and regular meetings like sprint planning and daily stand-ups."
+    },
+    {
+      "question": "What are the challenges of scaling agile methods for large systems?",
+      "answer": "Challenges include communication overheads, architectural complexity, team continuity issues, and dealing with external regulations. Strategies like multi-team Scrum, product architects, and release alignment help mitigate these challenges."
+    }
+  ],
+  "chapter3": [
+    {
+      "question": "What are the core principles and motivations behind agile development methods?",
+      "answer": "Agile methods prioritize individuals and interactions over processes and tools, working software over comprehensive documentation, customer collaboration over contract negotiation, and responding to change over following a plan. They emerged as a response to traditional methods being seen as too rigid and slow."
+    },
+    {
+      "question": "How do agile methods handle rapidly changing software requirements?",
+      "answer": "Agile methods handle changing requirements through iterative development, frequent releases, and continuous customer feedback. This allows teams to adapt quickly and deliver value incrementally."
+    },
+    {
+      "question": "Contrast plan-driven and agile development.",
+      "answer": "Plan-driven development involves upfront planning, stable requirements, and formal processes, while agile development is incremental, embraces change, and focuses on close customer collaboration. Plan-driven is better for projects with stable requirements, while agile is suited for volatile and evolving environments."
+    },
+    {
+      "question": "What are the key practices of Extreme Programming (XP)?",
+      "answer": "XP practices include user stories, refactoring, test-first development, pair programming, collective ownership, continuous integration, sustainable pace, and having an on-site customer."
+    },
+    {
+      "question": "What is a user story in agile development, and why is it valuable?",
+      "answer": "A user story is a brief, informal description of a feature from a user's perspective. It is valuable because it focuses on user needs, helps prioritize features, and facilitates conversation between developers and customers."
+    },
+    {
+      "question": "What is refactoring, and why is it essential in agile development?",
+      "answer": "Refactoring is the process of improving the structure and design of existing code without changing its behavior. It is essential because it makes the code easier to maintain and evolve, supporting agile's iterative nature."
+    },
+    {
+      "question": "Explain the process and benefits of Test-Driven Development (TDD).",
+      "answer": "TDD involves writing tests before the code to ensure it meets specifications. Benefits include improved design, reduced defects, and confidence in refactoring. Challenges include the time investment and difficulty in testing all aspects of a system."
+    },
+    {
+      "question": "What is pair programming, and what are its advantages?",
+      "answer": "Pair programming involves two developers working together at one workstation. It improves code quality, facilitates knowledge sharing, reduces risks of knowledge silos, and promotes communication."
+    },
+    {
+      "question": "Explain the Scrum framework and its three primary phases.",
+      "answer": "Scrum is an agile framework with three phases: initial (defining project vision and backlog), sprint cycles (2-4 week iterations focusing on delivering features), and closure (formal project close and review)."
+    },
+    {
+      "question": "What are the key roles in a Scrum team?",
+      "answer": "The key roles in Scrum are the Product Owner (responsible for defining and prioritizing features), the ScrumMaster (facilitates the Scrum process and removes impediments), and the Development Team (self-organizing team responsible for delivering software increments)."
+    }
+  ]
+}

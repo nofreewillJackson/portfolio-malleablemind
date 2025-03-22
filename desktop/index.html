@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <base href="/desktop/">
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/mylogo.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jackson Wu - Malleable Mind</title>
+  <style>
+    html, body {
+      margin: 0;
+      background-image: url('/desktop/public/loading.png'); /* Same image as loading screen */
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Loading screen overlay */
+    #loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('/loading.png'); /* cool loading image path */
+      background-size: cover;
+      background-position: center;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      transition: opacity 0.5s ease-out;
+    }
+
+    /* Glitch container */
+    .glitch-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* Glitch squares on the borders */
+    .glitch-square {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: rgba(255, 255, 255, 0.2);
+      animation: glitch 2s infinite;
+    }
+
+    /* Top border */
+    .glitch-square:nth-child(1) { top: 0; left: 0; }
+    .glitch-square:nth-child(2) { top: 0; left: 10%; }
+    .glitch-square:nth-child(3) { top: 0; left: 20%; }
+    .glitch-square:nth-child(4) { top: 0; left: 30%; }
+    .glitch-square:nth-child(5) { top: 0; left: 40%; }
+    .glitch-square:nth-child(6) { top: 0; left: 50%; }
+    .glitch-square:nth-child(7) { top: 0; left: 60%; }
+    .glitch-square:nth-child(8) { top: 0; left: 70%; }
+    .glitch-square:nth-child(9) { top: 0; left: 80%; }
+    .glitch-square:nth-child(10) { top: 0; left: 90%; }
+
+    /* Bottom border */
+    .glitch-square:nth-child(11) { bottom: 0; left: 0; }
+    .glitch-square:nth-child(12) { bottom: 0; left: 10%; }
+    .glitch-square:nth-child(13) { bottom: 0; left: 20%; }
+    .glitch-square:nth-child(14) { bottom: 0; left: 30%; }
+    .glitch-square:nth-child(15) { bottom: 0; left: 40%; }
+    .glitch-square:nth-child(16) { bottom: 0; left: 50%; }
+    .glitch-square:nth-child(17) { bottom: 0; left: 60%; }
+    .glitch-square:nth-child(18) { bottom: 0; left: 70%; }
+    .glitch-square:nth-child(19) { bottom: 0; left: 80%; }
+    .glitch-square:nth-child(20) { bottom: 0; left: 90%; }
+
+    /* Left border */
+    .glitch-square:nth-child(21) { top: 0; left: 0; }
+    .glitch-square:nth-child(22) { top: 10%; left: 0; }
+    .glitch-square:nth-child(23) { top: 20%; left: 0; }
+    .glitch-square:nth-child(24) { top: 30%; left: 0; }
+    .glitch-square:nth-child(25) { top: 40%; left: 0; }
+    .glitch-square:nth-child(26) { top: 50%; left: 0; }
+    .glitch-square:nth-child(27) { top: 60%; left: 0; }
+    .glitch-square:nth-child(28) { top: 70%; left: 0; }
+    .glitch-square:nth-child(29) { top: 80%; left: 0; }
+    .glitch-square:nth-child(30) { top: 90%; left: 0; }
+
+    /* Right border */
+    .glitch-square:nth-child(31) { top: 0; right: 0; }
+    .glitch-square:nth-child(32) { top: 10%; right: 0; }
+    .glitch-square:nth-child(33) { top: 20%; right: 0; }
+    .glitch-square:nth-child(34) { top: 30%; right: 0; }
+    .glitch-square:nth-child(35) { top: 40%; right: 0; }
+    .glitch-square:nth-child(36) { top: 50%; right: 0; }
+    .glitch-square:nth-child(37) { top: 60%; right: 0; }
+    .glitch-square:nth-child(38) { top: 70%; right: 0; }
+    .glitch-square:nth-child(39) { top: 80%; right: 0; }
+    .glitch-square:nth-child(40) { top: 90%; right: 0; }
+
+    /* Glitch animation */
+    @keyframes glitch {
+      0% {
+        opacity: 0;
+        transform: translate(0, 0) skew(0deg);
+      }
+      20% {
+        opacity: 1;
+        transform: translate(-10px, 10px) skew(-5deg);
+      }
+      40% {
+        opacity: 1;
+        transform: translate(10px, -10px) skew(5deg);
+      }
+      60% {
+        opacity: 1;
+        transform: translate(-10px, -10px) skew(-5deg);
+      }
+      80% {
+        opacity: 1;
+        transform: translate(10px, 10px) skew(5deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(52px, 0) skew(0deg);
+      }
+    }
+
+    /* Fade-out class */
+    #loading.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+<!-- using jb weld and superglue -->
+<div id="loading">
+  <div class="glitch-container">
+    <!-- holy mother of bandaid engineering -->
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+    <div class="glitch-square"></div>
+  </div>
+</div>
+
+<!-- Root div where the React app will render -->
+<div id="root"></div>
+
+<!-- Entry point for my gf to read because she's learning -->
+<script type="module" src="./src/main.jsx"></script>
+
+<!-- Script to remove the loading screen and reset the background -->
+<script>
+  function removeLoadingScreen() {
+    const loadingDiv = document.getElementById('loading');
+    loadingDiv.classList.add('fade-out');
+    setTimeout(() => {
+      loadingDiv.parentNode.removeChild(loadingDiv);
+      // Remove the background image from the body after the loading screen is gone
+      document.body.style.backgroundImage = 'none';
+    }, 500); // Match the CSS transition duration
+  }
+  // Remove loading screen after 2 seconds or when the page is fully loaded
+  setTimeout(removeLoadingScreen, 2000);
+  window.addEventListener('load', removeLoadingScreen);
+</script>
+
+</body>
+</html>
