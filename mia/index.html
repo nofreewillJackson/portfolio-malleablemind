@@ -1,65 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Ex-Friendship Analysis</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            background: linear-gradient(135deg, #2d3561 0%, #1a1f3a 50%, #2d3561 100%);
-            min-height: 100vh;
-            position: relative;
-            overflow: hidden;
-        }
-        body::before {
-            content: '';
-            position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: 
-                repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 200px,
-                    rgba(255, 255, 255, 0.015) 200px,
-                    rgba(255, 255, 255, 0.015) 201px
-                );
-            pointer-events: none;
-            z-index: 0;
-        }
-        body::after {
-            content: 'MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 400%;
-            height: 400%;
-            font-size: 2rem;
-            font-weight: 900;
-            color: rgba(255, 255, 255, 0.02);
-            line-height: 4;
-            word-spacing: 3rem;
-            transform: rotate(-15deg);
-            white-space: pre-wrap;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-        #root {
-            background: transparent;
-            position: relative;
-            z-index: 1;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Ex-Friendship Analysis</title>
+
+  <!-- React + Babel + Tailwind -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background: linear-gradient(135deg, #2d3561 0%, #1a1f3a 50%, #2d3561 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 200px,
+          rgba(255, 255, 255, 0.015) 200px,
+          rgba(255, 255, 255, 0.015) 201px
+        );
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: 'MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES    MIA & ANDRES';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 400%;
+      height: 400%;
+      font-size: 2rem;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.02);
+      line-height: 4;
+      word-spacing: 3rem;
+      transform: rotate(-15deg);
+      white-space: pre-wrap;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    #root {
+      position: relative;
+      z-index: 1;
+      background: transparent;
+    }
+  </style>
 </head>
+
 <body>
-    <div id="root"></div>
+  <!-- 🟦 Preamble Section -->
+  <div class="max-w-4xl mx-auto mt-10 mb-8 bg-slate-800 bg-opacity-70 p-6 rounded-xl border border-slate-600 shadow-lg relative z-10">
+    <h2 class="text-2xl font-bold text-slate-100 mb-3">Preamble</h2>
+    <p class="text-slate-300 leading-relaxed">
+      Please take the time to read this carefully and in full. With the assistance of advanced AI reasoning tools,
+      I’ve built this argument from first principles — meaning it relies on clear, step-by-step logic rather than jargon
+      or philosophy. It’s designed so that any literate and thoughtful reader can follow the reasoning and arrive at the
+      same conclusions without needing formal training in logic or psychology.
+    </p>
+  </div>
+
+  <!-- React mounts here -->
+  <div id="root"></div>
     
     <script type="text/babel">
         const { useState } = React;
@@ -641,13 +661,6 @@
                 <p className="text-slate-300 mb-4">
                   A logical examination of what maintaining friendship with an ex actually means—for you, for your ex, and for your current relationship. This isn't about judgment, but about understanding the structural realities and what your choices reveal about priorities.
                 </p>
-                
-                <div className="bg-amber-900 bg-opacity-30 border-l-4 border-amber-500 p-4 mb-4 rounded">
-                  <p className="font-semibold text-amber-300 mb-2">Please read this carefully and in full.</p>
-                  <p className="text-amber-200 text-sm">
-                    With the assistance of advanced LLM (large language model) reasoning tools, this argument has been built from first principles—meaning it relies on clear, step-by-step logic rather than jargon or philosophy. It's designed so that any literate and thoughtful reader can follow the reasoning and arrive at the same conclusions without needing formal training in logic or psychology.
-                  </p>
-                </div>
                 
                 <div className="bg-purple-900 bg-opacity-30 border-l-4 border-purple-500 p-4 mb-4 rounded">
                   <p className="font-semibold text-purple-300 flex items-center gap-2">
