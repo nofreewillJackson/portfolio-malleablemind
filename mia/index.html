@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Ex-Friendship Analysis</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            background: linear-gradient(135deg, #2d3561 0%, #1a1f3a 50%, #2d3561 100%);
-            min-height: 100vh;
-        }
-        #root {
-            background: transparent;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Ex-Friendship Analysis</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #2d3561 0%, #1a1f3a 50%, #2d3561 100%);
+      min-height: 100vh;
+    }
+    #root {
+      background: transparent;
+    }
+  </style>
 </head>
+
 <body>
-    <div id="root"></div>
+  <!-- ✅ Only one body tag -->
+  <div class="max-w-4xl mx-auto mt-10 mb-8 bg-slate-800 bg-opacity-70 p-6 rounded-xl border border-slate-600 shadow-lg">
+    <h2 class="text-2xl font-bold text-slate-100 mb-3">Preamble</h2>
+    <p class="text-slate-300 leading-relaxed">
+      Please take the time to read this carefully and in full. With the assistance of advanced LLM(large language model) reasoning tools,
+      I’ve built this argument from first principles --- meaning it relies on clear, step-by-step logic rather than jargon
+      or philosophy. It’s designed so that any literate and thoughtful reader can follow the reasoning and arrive at the
+      same conclusions without needing formal training in logic or psychology.
+    </p>
+  </div>
+
+  <div id="root"></div>
     
     <script type="text/babel">
         const { useState } = React;
@@ -152,8 +164,8 @@
                   {
                     id: 'intimacy_threshold',
                     question: 'The Intimacy Threshold Concept',
-                    explanation: 'Romantic relationships cross specific psychological and physical intimacy barriers that friendships never cross: sexual intimacy, life-planning intimacy, emotional vulnerability at depths friendships don\'t reach, and neurochemical bonding (oxytocin, dopamine patterns that create attachment).',
-                    conclusion: 'Key insight: Once these thresholds are crossed, the brain encodes this person differently than a regular friend. This encoding doesn\'t simply "reset."',
+                    explanation: 'A "threshold" is a point of no return—like crossing from one room into another, once you step through, you\'re in a different space. Romantic relationships cross specific psychological and physical intimacy barriers that friendships never cross: sexual intimacy, life-planning intimacy (discussing futures, merging lives), emotional vulnerability at depths friendships don\'t reach, and neurochemical bonding (oxytocin and dopamine patterns that create attachment—the same chemicals that bond mothers to infants).',
+                    conclusion: 'Key insight: Once these thresholds are crossed, the brain encodes this person differently than a regular friend. This encoding doesn\'t simply "reset." Think of it like staining wood—you can sand the surface, but the grain has absorbed the color deep within.',
                     status: 'warning',
                     children: [
                       {
@@ -165,22 +177,22 @@
                           {
                             id: 'memory_encoding',
                             question: 'How Memory Encoding Works',
-                            explanation: 'Your brain has encoded this person in the "romantic partner" category with associated emotional, physical, and psychological memories. Every interaction now carries this historical weight, whether consciously acknowledged or not.',
-                            conclusion: 'Observation: The brain cannot interact with someone as a casual friend when it has years of romantic encoding. The neural pathways remain active.',
+                            explanation: '"Encoding" is how the brain takes an experience and converts it into a stored memory—like how a camera encodes light into a digital file. Your brain has encoded this person in the "romantic partner" category with associated emotional, physical, and psychological memories. Every interaction now carries this historical weight, whether consciously acknowledged or not. It\'s like how you can\'t unlearn riding a bike—the neural pathways are permanent.',
+                            conclusion: 'Observation: The brain cannot interact with someone as a casual friend when it has years of romantic encoding. The neural pathways remain active, like muscle memory.',
                             status: 'fail'
                           },
                           {
                             id: 'emotional_conditioning',
                             question: 'Autonomic Nervous System Response',
-                            explanation: 'Your nervous system has been conditioned to respond to this person at romantic-partner intensity levels. Seeing their name, hearing their voice, being in their presence triggers different neurochemical responses than seeing a regular friend.',
-                            conclusion: 'Observation: The emotional activation remains disproportionate to what "friendship" would naturally produce. This creates internal dissonance.',
+                            explanation: 'The "autonomic nervous system" controls involuntary responses—your heart rate, breathing, stress reactions. It\'s the "automatic" part of you that reacts before your conscious mind decides anything (think: jumping at a loud noise). Your nervous system has been conditioned to respond to this person at romantic-partner intensity levels. Seeing their name, hearing their voice, being in their presence triggers different neurochemical responses than seeing a regular friend. This is classical conditioning—like Pavlov\'s dogs salivating at a bell.',
+                            conclusion: 'Observation: The emotional activation remains disproportionate to what "friendship" would naturally produce. Your body betrays what your mind tries to rationalize. This creates internal dissonance—a tension between what you tell yourself and what you physically feel.',
                             status: 'fail'
                           },
                           {
                             id: 'attachment_rewiring',
                             question: 'What Attachment Science Shows',
-                            explanation: 'The attachment neural circuits formed during romantic bonding involve the brain\'s deepest emotional centers. Research shows these circuits either remain active or must be completely severed through a grieving process. They don\'t naturally "convert" to friendship circuits.',
-                            conclusion: 'Scientific finding: Attachment bonds require complete separation and grieving to fully process. Maintaining contact prevents this neural rewiring.',
+                            explanation: 'Attachment theory (developed by psychologist John Bowlby) studies how humans form deep emotional bonds. The attachment neural circuits formed during romantic bonding involve the brain\'s deepest emotional centers—the amygdala (fear/emotion processor) and limbic system (survival and bonding). Research shows these circuits either remain active or must be completely severed through a grieving process. They don\'t naturally "convert" to friendship circuits. It\'s binary: either the attachment bond is alive, or it must die through grief. There\'s no "downgrade" option in the brain\'s architecture.',
+                            conclusion: 'Scientific finding: Attachment bonds require complete separation and grieving to fully process. Maintaining contact prevents this neural rewiring—like trying to heal a wound while constantly reopening it.',
                             status: 'fail'
                           }
                         ]
@@ -196,8 +208,8 @@
                       {
                         id: 'initiator_position',
                         question: 'The Initiator\'s Emotional Timeline',
-                        explanation: 'The person who ended it has already emotionally exited before the physical breakup. Research shows initiators begin emotional detachment 3-6 months before the actual breakup conversation.',
-                        conclusion: 'Reality: The initiator is proposing "friendship" from a position of emotional completion that the other person hasn\'t reached yet.',
+                        explanation: 'The "initiator" is the person who decided to end the relationship—they pulled the trigger. The person who ended it has already emotionally exited before the physical breakup. This is called "pre-grieving"—they mourned the relationship while still in it. Research shows initiators begin emotional detachment 3-6 months before the actual breakup conversation. By the time they say "we need to talk," they\'ve already processed most of their sadness, doubt, and loss.',
+                        conclusion: 'Reality: The initiator is proposing "friendship" from a position of emotional completion that the other person hasn\'t reached yet. It\'s like finishing a marathon and asking someone at mile 3 to just "walk the rest with you." The emotional labor is not equal.',
                         status: 'fail',
                         children: [
                           {
@@ -219,8 +231,8 @@
                           {
                             id: 'hope_addiction',
                             question: 'The Hope Maintenance Pattern',
-                            explanation: 'Every friendly interaction provides a small dopamine hit of "maybe they still care." The brain interprets continued contact as "the relationship isn\'t fully over." This prevents the neural grieving process that\'s necessary for moving on.',
-                            conclusion: 'Psychological reality: Staying in contact prevents the brain from fully processing the loss and forming new attachment patterns.',
+                            explanation: 'Dopamine is the brain\'s "reward" chemical—it fires when you anticipate something good, not when you get it. Every friendly interaction with an ex provides a small dopamine hit of "maybe they still care," "maybe we could get back together," "maybe I\'m still special to them." This is neurologically similar to gambling addiction—intermittent rewards keep you hooked. The brain interprets continued contact as "the relationship isn\'t fully over," which prevents the neural grieving process that\'s necessary for moving on. Grief requires finality; hope prevents finality.',
+                            conclusion: 'Psychological reality: Staying in contact prevents the brain from fully processing the loss and forming new attachment patterns. You\'re keeping yourself in emotional limbo.',
                             status: 'fail'
                           }
                         ]
@@ -444,8 +456,8 @@
                   {
                     id: 'emotional_availability',
                     question: 'Emotional Availability',
-                    explanation: 'Emotional bandwidth is finite. Time and energy invested in maintaining ex-friendship is time and energy not invested in your current relationship. Your partner can feel this, even if they don\'t articulate it.',
-                    conclusion: 'Reality check: If you have enough emotional energy for both your partner and maintaining ex-friendship, is your current relationship getting the full investment it deserves?',
+                    explanation: 'Emotional bandwidth is finite—you only have so much mental and emotional energy each day, like a battery that needs recharging. Time and energy invested in maintaining ex-friendship is time and energy not invested in your current relationship. This is called "opportunity cost" in economics: every choice means giving up alternatives. Your partner can feel this depletion, even if they don\'t articulate it. They sense when your attention is divided.',
+                    conclusion: 'Reality check: If you have enough emotional energy for both your partner and maintaining ex-friendship, is your current relationship getting the full investment it deserves? Or are you running at partial capacity?',
                     status: 'choice'
                   },
                   {
@@ -547,7 +559,7 @@
               {
                 id: 'the_litmus_test',
                 question: 'Why This is a Litmus Test',
-                explanation: 'Understanding what this decision reveals about values and priorities',
+                explanation: 'A "litmus test" comes from chemistry—litmus paper changes color when exposed to acids or bases, instantly revealing the pH level of a substance. It\'s a simple, reliable diagnostic tool that exposes hidden properties. In this context, the ex-friendship situation functions as a litmus test: it reveals underlying values, priorities, and emotional patterns that might otherwise remain hidden. Just as litmus paper doesn\'t judge whether something is acidic or basic (both are valid), this test doesn\'t judge your choices—it simply makes visible what your choices mean and what they reveal about your relationship priorities.',
                 status: 'choice',
                 children: [
                   {
@@ -570,19 +582,19 @@
                       {
                         id: 'test_3',
                         question: 'Boundary Health:',
-                        explanation: 'Can you create clear boundaries between past and present, or do they remain blurred? Healthy relationships require clear relational boundaries.',
+                        explanation: 'Boundaries are psychological property lines—they define where you end and another person begins. Healthy boundaries mean clear differentiation between past and present, between different relationships in your life. Can you create clear boundaries between past and present, or do they remain blurred? When past relationships overlap with present ones, it creates what psychologists call "enmeshment"—a tangling of relationships where nothing is clearly defined. Healthy relationships require clear relational boundaries, like having separate rooms in a house rather than everything happening in one cluttered space.',
                         status: 'choice'
                       },
                       {
                         id: 'test_4',
                         question: 'Conflict Resolution:',
-                        explanation: 'When your partner expresses a need that conflicts with your preference, what takes priority? This reveals how you handle future conflicts.',
+                        explanation: 'Conflict resolution is how you handle disagreements and competing needs. When your partner expresses a need that conflicts with your preference, what takes priority? This decision becomes a template—a pattern that predicts how you\'ll handle future conflicts. If you prioritize your own comfort over their stated need now, that pattern will repeat. Psychologists call this a "precedent"—the first ruling that sets the standard for all future rulings. This reveals your conflict resolution style: Do you collaborate, compromise, or prioritize your own needs?',
                         status: 'choice'
                       },
                       {
                         id: 'test_5',
                         question: 'Future Orientation:',
-                        explanation: 'Are you building forward into a new future, or maintaining anchors to the past? Where you invest attention reveals where your heart is oriented.',
+                        explanation: 'Orientation is the direction you\'re facing—like a compass pointing north or south. Are you building forward into a new future, or maintaining anchors to the past? "Anchors" are what keep boats from drifting forward—they hold you in place. Where you invest attention reveals where your heart is oriented. Psychologists note that what you think about expands—neural pathways strengthen with use. If you\'re regularly investing mental energy in past relationships, those pathways stay active. If you redirect that energy toward building new patterns with your current partner, new neural pathways form and strengthen. Your attention is like water flowing—it carves deeper channels wherever it flows most often.',
                         status: 'choice'
                       }
                     ]
