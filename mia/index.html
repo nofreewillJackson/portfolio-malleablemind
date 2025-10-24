@@ -22,23 +22,26 @@
     }
 
     /* watermark text (deep background) */
+/* watermark text (deep background) */
     body::before {
-      content: 'MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES';
+      content: 'MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES';
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 300%;
-      height: 300%;
+      top: -50%;
+      left: -50%;
+      width: 400%;
+      height: 400%;
       color: rgba(255,255,255,0.03);
       font-weight: 900;
       font-size: 3rem;
-      transform: rotate(-20deg);
+      transform: rotate(-25deg);
       white-space: pre-wrap;
-      line-height: 4;
-      word-spacing: 3rem;
+      line-height: 3.5;
+      word-spacing: 2rem;
+      letter-spacing: 0.2rem;
       pointer-events: none;
-      z-index: -2; /* very back */
+      z-index: -2;
     }
+
 
     /* embroidered motif (middle layer) */
     body::after {
