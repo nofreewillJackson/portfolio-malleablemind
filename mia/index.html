@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ex-Friendship Analysis</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Simple icon components
+        const ChevronDown = () => (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        );
+
+        const ChevronRight = () => (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        );
+
+        const AlertTriangle = ({ className }) => (
+            <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+        );
+
+        const XCircle = ({ className }) => (
+            <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="15" y1="9" x2="9" y2="15"></line>
+                <line x1="9" y1="9" x2="15" y2="15"></line>
+            </svg>
+        );
+
+        const TrendingDown = ({ className }) => (
+            <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
+                <polyline points="17 18 23 18 23 12"></polyline>
+            </svg>
+        );
+
+        const Scale = ({ className }) => (
+            <svg className={className} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M16 11V3a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v8"></path>
+                <path d="M9 21a2 2 0 0 1-2-2V11l-1 2v5a2 2 0 0 0 2 2z"></path>
+                <path d="M15 21a2 2 0 0 0 2-2V11l1 2v5a2 2 0 0 1-2 2z"></path>
+            </svg>
+        );
+
+        const ExFriendshipAnalysis = () => {
+          const [expandedNodes, setExpandedNodes] = useState(new Set(['root']));
+
+          const toggleNode = (nodeId) => {
+            const newExpanded = new Set(expandedNodes);
+            if (newExpanded.has(nodeId)) {
+              newExpanded.delete(nodeId);
+            } else {
+              newExpanded.add(nodeId);
+            }
+            setExpandedNodes(newExpanded);
+          };
+
+          const TreeNode = ({ node, level = 0 }) => {
+            const isExpanded = expandedNodes.has(node.id);
+            const hasChildren = node.children && node.children.length > 0;
+            
+            const getStatusIcon = () => {
+              if (node.status === 'warning') return <AlertTriangle className="w-5 h-5 text-amber-500" />;
+              if (node.status === 'fail') return <XCircle className="w-5 h-5 text-red-500" />;
+              if (node.status === 'decline') return <TrendingDown className="w-5 h-5 text-purple-500" />;
+              if (node.status === 'choice') return <Scale className="w-5 h-5 text-blue-500" />;
+              return null;
+            };
+
+            const getBgColor = () => {
+              if (node.status === 'warning') return 'bg-amber-50 border-amber-200';
+              if (node.status === 'fail') return 'bg-red-50 border-red-200';
+              if (node.status === 'decline') return 'bg-purple-50 border-purple-200';
+              if (node.status === 'choice') return 'bg-blue-50 border-blue-200';
+              return 'bg-gray-50 border-gray-200';
+            };
+
+            return (
+              <div className="ml-6 my-2">
+                <div
+                  className={`p-4 border-2 rounded-lg cursor-pointer transition-all ${getBgColor()} hover:shadow-md`}
+                  onClick={() => hasChildren && toggleNode(node.id)}
+                >
+                  <div className="flex items-start gap-3">
+                    {hasChildren && (
+                      <div className="mt-1">
+                        {isExpanded ? <ChevronDown /> : <ChevronRight />}
+                      </div>
+                    )}
+                    {getStatusIcon()}
+                    <div className="flex-1">
+                      <div className="font-semibold text-gray-800">{node.question}</div>
+                      {node.explanation && (
+                        <div className="text-sm text-gray-600 mt-2">{node.explanation}</div>
+                      )}
+                      {node.conclusion && (
+                        <div className="text-sm font-medium text-gray-700 mt-2 p-2 bg-white rounded border border-gray-300">
+                          {node.conclusion}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                {hasChildren && isExpanded && (
+                  <div className="border-l-2 border-gray-300 ml-3">
+                    {node.children.map((child) => (
+                      <TreeNode key={child.id} node={child} level={level + 1} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          };
+
+          const decisionTree = {
+            id: 'root',
+            question: 'Starting Question: Can two people who had a romantic relationship successfully remain friends after breaking up?',
+            explanation: 'This analysis examines the structural realities of ex-friendships. The goal is not to judge, but to understand what maintaining such a friendship actually indicates about emotional resolution and current relationship priorities.',
+            children: [
+              {
+                id: 'premise',
+                question: 'Foundation: What makes romantic relationships categorically different from friendships?',
+                explanation: 'To understand why "reverting" to friendship is problematic, we first need to understand what romantic relationships fundamentally are.',
+                status: 'warning',
+                children: [
+                  {
+                    id: 'intimacy_threshold',
+                    question: 'The Intimacy Threshold Concept',
+                    explanation: 'Romantic relationships cross specific psychological and physical intimacy barriers that friendships never cross: sexual intimacy, life-planning intimacy, emotional vulnerability at depths friendships don\'t reach, and neurochemical bonding (oxytocin, dopamine patterns that create attachment).',
+                    conclusion: 'Key insight: Once these thresholds are crossed, the brain encodes this person differently than a regular friend. This encoding doesn\'t simply "reset."',
+                    status: 'warning',
+                    children: [
+                      {
+                        id: 'neural_permanence',
+                        question: 'The Neural Encoding Problem',
+                        explanation: 'Neuroscience perspective on attachment and memory',
+                        status: 'fail',
+                        children: [
+                          {
+                            id: 'memory_encoding',
+                            question: 'How Memory Encoding Works',
+                            explanation: 'Your brain has encoded this person in the "romantic partner" category with associated emotional, physical, and psychological memories. Every interaction now carries this historical weight, whether consciously acknowledged or not.',
+                            conclusion: 'Observation: The brain cannot interact with someone as a casual friend when it has years of romantic encoding. The neural pathways remain active.',
+                            status: 'fail'
+                          },
+                          {
+                            id: 'emotional_conditioning',
+                            question: 'Autonomic Nervous System Response',
+                            explanation: 'Your nervous system has been conditioned to respond to this person at romantic-partner intensity levels. Seeing their name, hearing their voice, being in their presence triggers different neurochemical responses than seeing a regular friend.',
+                            conclusion: 'Observation: The emotional activation remains disproportionate to what "friendship" would naturally produce. This creates internal dissonance.',
+                            status: 'fail'
+                          },
+                          {
+                            id: 'attachment_rewiring',
+                            question: 'What Attachment Science Shows',
+                            explanation: 'The attachment neural circuits formed during romantic bonding involve the brain\'s deepest emotional centers. Research shows these circuits either remain active or must be completely severed through a grieving process. They don\'t naturally "convert" to friendship circuits.',
+                            conclusion: 'Scientific finding: Attachment bonds require complete separation and grieving to fully process. Maintaining contact prevents this neural rewiring.',
+                            status: 'fail'
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    id: 'asymmetric_reality',
+                    question: 'The Asymmetry in Every Breakup',
+                    explanation: 'Every breakup has an initiator and a recipient. Even "mutual" breakups have someone who wanted it more or decided first. This creates an inherent power imbalance in any post-breakup dynamic.',
+                    status: 'fail',
+                    children: [
+                      {
+                        id: 'initiator_position',
+                        question: 'The Initiator\'s Emotional Timeline',
+                        explanation: 'The person who ended it has already emotionally exited before the physical breakup. Research shows initiators begin emotional detachment 3-6 months before the actual breakup conversation.',
+                        conclusion: 'Reality: The initiator is proposing "friendship" from a position of emotional completion that the other person hasn\'t reached yet.',
+                        status: 'fail',
+                        children: [
+                          {
+                            id: 'initiator_timeline',
+                            question: 'Why Initiators Want to Stay Friends',
+                            explanation: 'Common motivations: (1) To manage their own guilt about ending the relationship, (2) To prove to themselves they\'re "not the bad guy," (3) To maintain some connection because full separation feels too final.',
+                            conclusion: 'Pattern observation: The friendship serves the initiator\'s emotional needs more than the recipient\'s. This creates an asymmetric dynamic.',
+                            status: 'fail'
+                          }
+                        ]
+                      },
+                      {
+                        id: 'recipient_position',
+                        question: 'The Recipient\'s Position',
+                        explanation: 'The person who didn\'t want the breakup often accepts "friendship" as a consolation prize. Psychologically, proximity keeps hope alive, even if unconsciously.',
+                        conclusion: 'Pattern observation: Accepting friendship when you wanted more isn\'t friendship—it\'s hope maintenance. This prevents emotional closure.',
+                        status: 'fail',
+                        children: [
+                          {
+                            id: 'hope_addiction',
+                            question: 'The Hope Maintenance Pattern',
+                            explanation: 'Every friendly interaction provides a small dopamine hit of "maybe they still care." The brain interprets continued contact as "the relationship isn\'t fully over." This prevents the neural grieving process that\'s necessary for moving on.',
+                            conclusion: 'Psychological reality: Staying in contact prevents the brain from fully processing the loss and forming new attachment patterns.',
+                            status: 'fail'
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'practical_impossibilities',
+                question: 'Why "Just Friends" Creates Practical Problems',
+                explanation: 'Even with good intentions, structural realities make ex-friendship incompatible with new romantic relationships.',
+                status: 'fail',
+                children: [
+                  {
+                    id: 'new_partner_problem',
+                    question: 'The New Partner Dynamic',
+                    explanation: 'When either person enters a new romantic relationship, the ex-friendship creates an inherent conflict.',
+                    status: 'fail',
+                    children: [
+                      {
+                        id: 'new_partner_perspective',
+                        question: 'Understanding the New Partner\'s Perspective',
+                        explanation: 'A new partner who feels uncomfortable with ex-friendship isn\'t being "insecure." They\'re responding to a real structural issue.',
+                        status: 'fail',
+                        children: [
+                          {
+                            id: 'intimacy_comparison',
+                            question: 'The Historical Intimacy Advantage',
+                            explanation: 'The ex shares a depth of history and intimacy that the new partner is still building. The ex has already seen every vulnerable moment, knows family dynamics, understands old wounds and joys. The new partner cannot compete with this historical depth.',
+                            conclusion: 'Reality: This creates a permanent comparison dynamic where the new partner feels they\'re competing with a ghost.',
+                            status: 'fail'
+                          },
+                          {
+                            id: 'residual_claim',
+                            question: 'The Psychological "Claim" Effect',
+                            explanation: 'The ex maintains a psychological "claim" on your partner—they were there first, know them deeply, share private jokes and memories. From the new partner\'s perspective, someone else still has access to parts of their partner they don\'t.',
+                            conclusion: 'Perception: Ex-friendship signals incomplete emotional availability. The past still has active presence in the present.',
+                            status: 'fail'
+                          },
+                          {
+                            id: 'priority_test',
+                            question: 'The Priority Decision Point',
+                            explanation: 'When a new partner expresses discomfort and their partner defends the ex-friendship, a choice is being made: ex\'s comfort vs. current partner\'s security. This decision reveals true priorities.',
+                            conclusion: 'Critical insight: Choosing to maintain ex-friendship despite current partner\'s discomfort sends a message about where emotional priority lies.',
+                            status: 'choice'
+                          }
+                        ]
+                      },
+                      {
+                        id: 'authentic_sharing',
+                        question: 'The Authentic Sharing Impossibility',
+                        explanation: 'What can you actually share with an ex-friend that\'s appropriate while in a new relationship?',
+                        status: 'fail',
+                        children: [
+                          {
+                            id: 'boundary_paradox',
+                            question: 'The Conversational Boundary Problem',
+                            explanation: 'Consider what topics are appropriate: New relationship happiness? That\'s insensitive to the ex. Relationship struggles? That violates your current partner\'s privacy and creates emotional intimacy with the ex. Deep personal issues? That emotional intimacy should go to your current partner. Surface topics only? Then it\'s not real friendship.',
+                            conclusion: 'Logical conclusion: Every conversation topic is either inappropriate or superficial. If it must stay superficial, it\'s not genuine friendship.',
+                            status: 'fail'
+                          },
+                          {
+                            id: 'emotional_intimacy_question',
+                            question: 'The Emotional Intimacy Dilemma',
+                            explanation: 'Real friendship requires emotional honesty and depth. But emotional depth with an ex while in a new relationship creates a three-person dynamic. Your emotional bandwidth is now split between current partner and ex.',
+                            conclusion: 'Question to consider: If you can share deep emotions with your ex, why? If you can\'t, is it really friendship?',
+                            status: 'fail'
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    id: 'deterioration_timeline',
+                    question: 'The Natural Deterioration Pattern',
+                    explanation: 'Observational data shows ex-friendships follow predictable decay patterns over time.',
+                    status: 'decline',
+                    children: [
+                      {
+                        id: 'contact_decay',
+                        question: 'Contact Frequency Over Time',
+                        explanation: 'Statistical pattern observed: Months 1-3 post-breakup show high contact. Months 4-8 show 60% reduction. Years 1-2 show sporadic, surface-level contact. Year 3+ typically shows only holiday/birthday contact or complete cessation.',
+                        conclusion: 'Pattern insight: If it naturally decays to nothing, was it ever real friendship? Or was it just relationship momentum gradually running out?',
+                        status: 'decline'
+                      },
+                      {
+                        id: 'depth_decay',
+                        question: 'Emotional Depth Over Time',
+                        explanation: 'What people discuss with ex-friends typically shifts: Early months involve processing the relationship and shared history. Middle period involves surface updates about careers and life. Later period becomes generic pleasantries with no real substance.',
+                        conclusion: 'Observation: The emotional depth required for genuine friendship never develops. It remains at acquaintance level.',
+                        status: 'decline'
+                      },
+                      {
+                        id: 'natural_ending',
+                        question: 'What The Decay Reveals',
+                        explanation: 'If ex-friendship naturally fades to nothing without intervention, this proves it was never self-sustaining. Real friendships don\'t require the romantic relationship scaffolding to exist—they stand on their own merit.',
+                        conclusion: 'Logical inference: Ex-friendship is typically relationship afterglow, not genuine friendship. When the glow fades, nothing substantial remains.',
+                        status: 'fail'
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'function_analysis',
+                question: 'What Function Does Ex-Friendship Actually Serve?',
+                explanation: 'Rather than accepting the label "friendship" at face value, let\'s examine what psychological function is actually being performed.',
+                status: 'fail',
+                children: [
+                  {
+                    id: 'functions_identified',
+                    question: 'Six Common Non-Friendship Functions',
+                    explanation: 'Ex-friendships typically serve one or more of these purposes, none of which are what we traditionally call friendship',
+                    children: [
+                      {
+                        id: 'function_grief_avoidance',
+                        question: 'Function 1: Avoiding the Grief Process',
+                        explanation: 'Staying in contact prevents the necessary psychological work of grieving the loss. Breakups require a kind of psychological death and rebirth: the relationship must "die" for you to be reborn as a separate, complete individual.',
+                        conclusion: 'If this function is active: You cannot grieve what you refuse to let die. Continued contact postpones necessary emotional processing.',
+                        status: 'fail'
+                      },
+                      {
+                        id: 'function_ego_preservation',
+                        question: 'Function 2: Ego Management',
+                        explanation: 'For the initiator: "I\'m such a good person that my exes want to be friends with me." For the recipient: "I\'m so valuable that my ex can\'t fully let me go." Both get ego reinforcement from the continued connection.',
+                        conclusion: 'If this function is active: The friendship serves self-image needs rather than genuine care for the other person.',
+                        status: 'fail'
+                      },
+                      {
+                        id: 'function_optionality',
+                        question: 'Function 3: Maintaining Future Options',
+                        explanation: 'Keeping an ex in your orbit preserves the option to reconnect if current life circumstances don\'t work out. This is hedging against future loneliness or regret.',
+                        conclusion: 'If this function is active: The friendship is an insurance policy, not genuine connection. True friendship doesn\'t serve as backup plan.',
+                        status: 'fail'
+                      },
+                      {
+                        id: 'function_validation',
+                        question: 'Function 4: External Validation',
+                        explanation: 'One or both people still derive self-worth from the other\'s attention and approval. The ex serves as an external validator of your worth or life choices.',
+                        conclusion: 'If this function is active: You\'re outsourcing self-esteem to someone from your past rather than building independent self-worth.',
+                        status: 'fail'
+                      },
+                      {
+                        id: 'function_conflict_avoidance',
+                        question: 'Function 5: Social Convenience',
+                        explanation: 'Staying "friends" avoids the awkwardness of complete separation, especially in shared friend groups or communities. It\'s easier to stay cordial than to create clear boundaries.',
+                        conclusion: 'If this function is active: The friendship is about avoiding discomfort, not choosing connection. Convenience isn\'t the same as genuine friendship.',
+                        status: 'fail'
+                      },
+                      {
+                        id: 'function_control',
+                        question: 'Function 6: Information Access',
+                        explanation: 'Staying in contact allows monitoring of their life—who they\'re dating, whether they\'re happy, if they\'ve moved on. This provides information that soothes anxiety about being replaced or forgotten.',
+                        conclusion: 'If this function is active: The friendship is information gathering. This indicates attachment hasn\'t been fully released.',
+                        status: 'fail'
+                      }
+                    ]
+                  },
+                  {
+                    id: 'function_self_assessment',
+                    question: 'Self-Assessment Question',
+                    explanation: 'An honest question worth considering',
+                    conclusion: 'Which of these six functions might apply to your situation? If any do, what does that reveal about whether this is genuine friendship or something else?',
+                    status: 'choice'
+                  }
+                ]
+              },
+              {
+                id: 'counterfactual_test',
+                question: 'The Counterfactual Friendship Test',
+                explanation: 'A logical thought experiment to test whether ex-friendship is genuine',
+                status: 'fail',
+                children: [
+                  {
+                    id: 'counterfactual_question',
+                    question: 'The Thought Experiment',
+                    explanation: 'Imagine meeting your ex for the first time today, as they are now, with no romantic history between you. Same personality, same interests, same values—but you never dated.',
+                    conclusion: 'Critical question: Would you actively pursue friendship with this person? Would they be someone you\'d make effort to stay connected with?',
+                    status: 'choice',
+                    children: [
+                      {
+                        id: 'counterfactual_no',
+                        question: 'If the answer is NO:',
+                        explanation: 'Then the "friendship" isn\'t based on genuine friendship compatibility. You\'re maintaining contact because of relationship history, not because you\'d naturally choose this person as a friend.',
+                        conclusion: 'Logical conclusion: This isn\'t friendship. This is relationship momentum masquerading as friendship—a habit rather than a choice.',
+                        status: 'fail'
+                      },
+                      {
+                        id: 'counterfactual_yes',
+                        question: 'If the answer is YES:',
+                        explanation: 'Then a follow-up question emerges: If you\'re so compatible as friends, why did the romantic relationship fail? Romantic relationships include everything friendship has, plus attraction, intimacy, and commitment.',
+                        status: 'fail',
+                        children: [
+                          {
+                            id: 'compatibility_problem',
+                            question: 'The Compatibility Question',
+                            explanation: 'Usually "better as friends" means one person wanted more intimacy or commitment than the other could give. This fundamental asymmetry doesn\'t disappear when you call it friendship—it\'s just being suppressed.',
+                            conclusion: 'If you\'re truly compatible as friends: The core incompatibility that ended the romance still exists beneath the surface. Friendship requires both people to ignore this elephant in the room.',
+                            status: 'fail'
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'current_relationship_impact',
+                question: 'How Ex-Friendship Affects Your Current Relationship',
+                explanation: 'The specific ways maintaining ex-friendship impacts a new romantic relationship',
+                status: 'choice',
+                children: [
+                  {
+                    id: 'trust_foundation',
+                    question: 'The Trust Foundation',
+                    explanation: 'Trust in a relationship requires feeling like you\'re your partner\'s priority. When your partner maintains meaningful contact with an ex, it creates a subtle but persistent question: "Am I really the priority, or is part of their heart still elsewhere?"',
+                    conclusion: 'For your partner: Every interaction you have with your ex is a small withdrawal from their trust account, even if nothing inappropriate happens.',
+                    status: 'fail'
+                  },
+                  {
+                    id: 'emotional_availability',
+                    question: 'Emotional Availability',
+                    explanation: 'Emotional bandwidth is finite. Time and energy invested in maintaining ex-friendship is time and energy not invested in your current relationship. Your partner can feel this, even if they don\'t articulate it.',
+                    conclusion: 'Reality check: If you have enough emotional energy for both your partner and maintaining ex-friendship, is your current relationship getting the full investment it deserves?',
+                    status: 'choice'
+                  },
+                  {
+                    id: 'comparison_anxiety',
+                    question: 'The Comparison Dynamic',
+                    explanation: 'Your current partner knows your ex has historical intimacy they\'re still building. They know your ex understands parts of you from shared experiences. This creates low-level anxiety: "How do I measure up? Am I enough?"',
+                    conclusion: 'For your partner: They\'re building intimacy with you while knowing someone from your past still has access to you. This makes them feel like they\'re in competition.',
+                    status: 'fail'
+                  },
+                  {
+                    id: 'boundary_modeling',
+                    question: 'What Boundaries Communicate',
+                    explanation: 'The boundaries you maintain (or don\'t maintain) with your ex communicate your values to your current partner. Loose boundaries signal: "My past relationships still have claims on my present." Clear boundaries signal: "I\'m fully invested in building our future."',
+                    conclusion: 'Message sent: Your boundary choices tell your partner whether you prioritize their comfort and security, or your connection to the past.',
+                    status: 'choice'
+                  }
+                ]
+              },
+              {
+                id: 'the_choice_framework',
+                question: 'Understanding the Choice You Face',
+                explanation: 'This isn\'t about right or wrong—it\'s about understanding what your choices reveal and what they cost.',
+                status: 'choice',
+                children: [
+                  {
+                    id: 'choice_a',
+                    question: 'Choice A: Maintain Ex-Friendship',
+                    explanation: 'This choice is completely valid, but it comes with implications worth understanding.',
+                    status: 'choice',
+                    children: [
+                      {
+                        id: 'choice_a_implications',
+                        question: 'What This Choice Signals',
+                        explanation: 'Implications to consider honestly',
+                        children: [
+                          {
+                            id: 'implication_1',
+                            question: 'To Your Current Partner:',
+                            explanation: 'You\'re signaling that your comfort and connection with your ex takes priority over their discomfort and sense of security. You\'re asking them to trust that this relationship from your past doesn\'t threaten your present.',
+                            conclusion: 'Their perspective: "They\'re choosing to keep someone who loved them romantically in their life despite knowing it makes me uncomfortable."',
+                            status: 'choice'
+                          },
+                          {
+                            id: 'implication_2',
+                            question: 'About Emotional Resolution:',
+                            explanation: 'Maintaining the friendship suggests that relationship still serves an active emotional function in your life. If it didn\'t, it would naturally fade.',
+                            conclusion: 'Self-reflection question: What need is this friendship fulfilling? Why is maintaining it important enough to create tension in your current relationship?',
+                            status: 'choice'
+                          },
+                          {
+                            id: 'implication_3',
+                            question: 'Long-term Pattern:',
+                            explanation: 'Your current partner sees that you maintain connections with romantic partners from your past. This sets an expectation: if your current relationship ends, you\'ll want to stay friends with them too.',
+                            conclusion: 'Pattern recognition: Your boundary patterns with exes predict your future boundary patterns. This reveals something about how you handle relationship endings.',
+                            status: 'choice'
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    id: 'choice_b',
+                    question: 'Choice B: Create Distance From Ex',
+                    explanation: 'This choice prioritizes your current relationship and allows natural closure with the past.',
+                    status: 'choice',
+                    children: [
+                      {
+                        id: 'choice_b_implications',
+                        question: 'What This Choice Signals',
+                        explanation: 'Implications worth understanding',
+                        children: [
+                          {
+                            id: 'implication_b_1',
+                            question: 'To Your Current Partner:',
+                            explanation: 'You\'re signaling that their comfort and security is your priority. You\'re willing to let go of past connections to fully invest in your present relationship.',
+                            conclusion: 'Their perspective: "They chose me. They\'re showing through actions that I\'m the priority."',
+                            status: 'choice'
+                          },
+                          {
+                            id: 'implication_b_2',
+                            question: 'About Emotional Resolution:',
+                            explanation: 'Creating distance allows the complete neural rewiring that science shows is necessary for full emotional closure. You\'re allowing yourself to fully grieve the past and invest in the present.',
+                            conclusion: 'Personal growth: Distance provides the space needed to process the past completely rather than keeping it on life support.',
+                            status: 'choice'
+                          },
+                          {
+                            id: 'implication_b_3',
+                            question: 'Long-term Relationship Health:',
+                            explanation: 'Clear boundaries with exes reduce ongoing anxiety and trust questions in your current relationship. Your partner doesn\'t have to wonder or manage discomfort about past relationships intruding on the present.',
+                            conclusion: 'Foundation building: This choice creates a cleaner slate for building deep trust and intimacy without ghosts from the past.',
+                            status: 'choice'
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                id: 'the_litmus_test',
+                question: 'Why This is a Litmus Test',
+                explanation: 'Understanding what this decision reveals about values and priorities',
+                status: 'choice',
+                children: [
+                  {
+                    id: 'what_it_tests',
+                    question: 'What This Decision Actually Tests',
+                    explanation: 'Five dimensions being revealed by this choice',
+                    children: [
+                      {
+                        id: 'test_1',
+                        question: 'Priority System:',
+                        explanation: 'Does your current partner\'s emotional security take priority over maintaining connections to your romantic past? Your choice reveals the answer.',
+                        status: 'choice'
+                      },
+                      {
+                        id: 'test_2',
+                        question: 'Emotional Availability:',
+                        explanation: 'Are you willing to fully invest emotional bandwidth in your current relationship, or do you need to maintain emotional connections to past relationships?',
+                        status: 'choice'
+                      },
+                      {
+                        id: 'test_3',
+                        question: 'Boundary Health:',
+                        explanation: 'Can you create clear boundaries between past and present, or do they remain blurred? Healthy relationships require clear relational boundaries.',
+                        status: 'choice'
+                      },
+                      {
+                        id: 'test_4',
+                        question: 'Conflict Resolution:',
+                        explanation: 'When your partner expresses a need that conflicts with your preference, what takes priority? This reveals how you handle future conflicts.',
+                        status: 'choice'
+                      },
+                      {
+                        id: 'test_5',
+                        question: 'Future Orientation:',
+                        explanation: 'Are you building forward into a new future, or maintaining anchors to the past? Where you invest attention reveals where your heart is oriented.',
+                        status: 'choice'
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          };
+
+          return (
+            <div className="max-w-5xl mx-auto p-6 bg-white">
+              <div className="mb-8">
+                <h1 className="text-3xl font-bold text-gray-900 mb-4">
+                  The Ex-Friendship Question: An Analytical Framework
+                </h1>
+                <p className="text-gray-700 mb-4">
+                  A logical examination of what maintaining friendship with an ex actually means—for you, for your ex, and for your current relationship. This isn't about judgment, but about understanding the structural realities and what your choices reveal about priorities.
+                </p>
+                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
+                  <p className="font-semibold text-blue-900">For Andres:</p>
+                  <p className="text-blue-800">
+                    This analysis is designed to help you think through the ex-friendship question logically. It examines the neuroscience, psychology, and practical realities—not to tell you what to do, but to help you understand what your choices mean and what they cost. The goal is clarity about what maintaining this friendship actually indicates and how it affects your current relationship.
+                  </p>
+                </div>
+                <div className="bg-gray-50 border-l-4 border-gray-400 p-4">
+                  <p className="font-semibold text-gray-900">How to use this analysis:</p>
+                  <p className="text-gray-700">Click any section to expand the full reasoning. Follow the logical chain from neuroscience through practical implications to the choice you face. The conclusion emerges naturally from the evidence.</p>
+                </div>
+              </div>
+
+              <TreeNode node={decisionTree} />
+
+              <div className="mt-8 p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border-2 border-blue-300">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">The Natural Conclusion</h2>
+                <div className="space-y-4">
+                  <div className="bg-white p-4 rounded-lg shadow-sm">
+                    <p className="font-bold text-blue-900 mb-2">What the evidence shows:</p>
+                    <p className="text-gray-800">Romantic relationships create neural encodings that don't simply "downgrade" to friendship. Every supposed ex-friendship serves a function beyond genuine friendship: grief avoidance, ego management, optionality, validation, convenience, or monitoring. These aren't friendship—they're unresolved emotional business.</p>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg shadow-sm">
+                    <p className="font-bold text-blue-900 mb-2">What your current partner experiences:</p>
+                    <p className="text-gray-800">Your partner feels they're competing with historical intimacy they can't match. They experience comparison anxiety. They receive the message that your comfort with your past takes priority over their security in the present. They wonder if they're really your priority.</p>
+                  </div>
+                  <div className="bg-white p-4 rounded-lg shadow-sm">
+                    <p className="font-bold text-blue-900 mb-2">What this decision tests:</p>
+                    <p className="text-gray-800">This is a litmus test for priorities, emotional availability, boundary health, conflict resolution, and future orientation. Your choice reveals whether you're building forward or maintaining anchors to the past.</p>
+                  </div>
+                  <div className="bg-blue-100 p-5 rounded-lg border-2 border-blue-400 mt-4">
+                    <p className="font-bold text-blue-900 text-lg mb-3">For Andres—The Choice Before You:</p>
+                    <p className="text-gray-900 mb-3">
+                      You can maintain your friendship with your ex. That's a valid choice. But understand what it signals: that this connection from your past is important enough to you that you're willing to ask your current partner to be uncomfortable with it.
+                    </p>
+                    <p className="text-gray-900 mb-3">
+                      Or you can choose to create distance. Not because someone is forcing you, but because you've thought through what maintaining this friendship actually means, what function it serves, and what it costs your current relationship.
+                    </p>
+                    <p className="text-gray-900 font-semibold">
+                      The analysis suggests a clear answer: if you want to build the deepest possible trust and intimacy with your current partner, maintaining meaningful connection with your ex works against that goal. The question is whether that goal is your priority.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<ExFriendshipAnalysis />);
+    </script>
+</body>
+</html>
