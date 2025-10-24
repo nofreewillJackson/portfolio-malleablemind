@@ -47,6 +47,8 @@
     .picture-box a {
       display: block;
       width: 100%;
+      text-decoration: none;
+      color: inherit;
     }
     .picture-box img {
       width: 100%;
@@ -59,6 +61,55 @@
       font-size: 1.25rem;
       line-height: 1.4;
     }
+    
+    /* Make entire third box clickable */
+    .picture-box.clickable-box {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .picture-box.clickable-box:hover {
+      border-color: #4a9eff;
+      background-color: #2a2a2a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(74, 158, 255, 0.3);
+    }
+    
+    /* Watermark graphic for third box */
+    .watermark-box {
+      position: relative;
+      width: 100%;
+      min-height: 300px;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    
+    .watermark-text {
+      position: absolute;
+      font-size: 4rem;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.05);
+      transform: rotate(-15deg);
+      user-select: none;
+      white-space: nowrap;
+      line-height: 1.2;
+    }
+    
+    .watermark-pattern {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    .center-icon {
+      position: relative;
+      z-index: 1;
+      font-size: 5rem;
+      opacity: 0.8;
+    }
+    
     /* On larger screens, display first two boxes side by side, third full width below */
     @media (min-width: 768px) {
       .container {
@@ -73,6 +124,10 @@
       .picture-box:nth-child(3) {
         flex: 1 1 100%;
       }
+      
+      .watermark-text {
+        font-size: 5rem;
+      }
     }
   </style>
 </head>
@@ -82,37 +137,44 @@
     <div class="picture-box">
       <a href="https://garden.wujackson.com">
         <img src="/desktopsnapshot2.png" alt="Desktop snapshot" />
+        <p>
+          <strong>www.wujackson.com/jackson</strong><br>
+          Thoughtwork. Idea garden. Explorations in motion.<br>
+          Dive into my creative process.
+        </p>
       </a>
-      <p>
-        <strong>www.wujackson.com/jackson</strong><br>
-        Thoughtwork. Idea garden. Explorations in motion.<br>
-        Dive into my creative process.
-      </p>
     </div>
 
     <!-- Second Picture Box -->
     <div class="picture-box">
       <a href="https://www.malleablemind.ai/desktop">
         <img src="/desktopsnapshot.png" alt="Desktop snapshot 2" />
+        <p>
+          <strong>malleablemind.ai</strong><br>
+          My playground.<br>
+          Windows 95 vibes. Vaporwave. WIP. Malleable. Intentional.
+        </p>
       </a>
-      <p>
-        <strong>malleablemind.ai</strong><br>
-        My playground.<br>
-        Windows 95 vibes. Vaporwave. WIP. Malleable. Intentional.
-      </p>
     </div>
 
-    <!-- Third Picture Box - NEW -->
-    <div class="picture-box">
-      <a href="https://www.malleablemind.ai/mia">
-        <img src="/mia-snapshot.png" alt="Ex-friendship analysis" />
-      </a>
-      <p>
-        <strong>malleablemind.ai/mia</strong><br>
-        Decision tree analysis.<br>
-        For Mia & Andres to go through. Stable/logical frameworks for difficult questions.
-      </p>
-    </div>
+    <!-- Third Picture Box - Fully Clickable with Watermark -->
+    <a href="https://www.malleablemind.ai/mia" style="text-decoration: none; color: inherit; width: 100%;">
+      <div class="picture-box clickable-box">
+        <div class="watermark-box">
+          <div class="watermark-pattern">
+            <div class="watermark-text">FOR MIA & ANDRES</div>
+            <div class="watermark-text" style="margin-left: 100px;">FOR MIA & ANDRES</div>
+            <div class="watermark-text">FOR MIA & ANDRES</div>
+          </div>
+          <div class="center-icon">💭</div>
+        </div>
+        <p>
+          <strong>malleablemind.ai/mia</strong><br>
+          Decision tree analysis.<br>
+          For Mia & Andres to go through. Stable/logical frameworks for difficult questions.
+        </p>
+      </div>
+    </a>
   </div>
 </body>
 </html>
