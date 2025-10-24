@@ -21,8 +21,27 @@
       font-family: 'Inter', sans-serif;
     }
 
-    /* repeating embroidered motif */
+    /* watermark text (deep background) */
     body::before {
+      content: 'MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES   MIA & ANDRES';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300%;
+      height: 300%;
+      color: rgba(255,255,255,0.03);
+      font-weight: 900;
+      font-size: 3rem;
+      transform: rotate(-20deg);
+      white-space: pre-wrap;
+      line-height: 4;
+      word-spacing: 3rem;
+      pointer-events: none;
+      z-index: -2; /* very back */
+    }
+
+    /* embroidered motif (middle layer) */
+    body::after {
       content: "";
       position: fixed;
       top: 0;
@@ -48,12 +67,16 @@
       background-repeat: repeat;
       background-size: 180px 180px;
       transform: rotate(-10deg) scale(1.2);
-      z-index: 0;
+      z-index: -1; /* above watermark, below everything else */
     }
 
-    #root { position: relative; z-index: 1; }
+    #root {
+      position: relative;
+      z-index: 1; /* keeps your app above both backgrounds */
+    }
   </style>
 </head>
+
 
 <body>
   <div class="max-w-4xl mx-auto mt-10 mb-8 bg-slate-800 bg-opacity-70 p-6 rounded-xl border border-slate-600 shadow-lg">
