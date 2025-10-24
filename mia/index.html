@@ -8,6 +8,15 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #2d3561 0%, #1a1f3a 50%, #2d3561 100%);
+            min-height: 100vh;
+        }
+        #root {
+            background: transparent;
+        }
+    </style>
 </head>
 <body>
     <div id="root"></div>
@@ -85,11 +94,11 @@
             };
 
             const getBgColor = () => {
-              if (node.status === 'warning') return 'bg-amber-50 border-amber-200';
-              if (node.status === 'fail') return 'bg-red-50 border-red-200';
-              if (node.status === 'decline') return 'bg-purple-50 border-purple-200';
-              if (node.status === 'choice') return 'bg-blue-50 border-blue-200';
-              return 'bg-gray-50 border-gray-200';
+              if (node.status === 'warning') return 'bg-amber-900 bg-opacity-20 border-amber-700';
+              if (node.status === 'fail') return 'bg-rose-900 bg-opacity-20 border-rose-700';
+              if (node.status === 'decline') return 'bg-purple-900 bg-opacity-20 border-purple-700';
+              if (node.status === 'choice') return 'bg-blue-900 bg-opacity-20 border-blue-700';
+              return 'bg-slate-800 bg-opacity-40 border-slate-600';
             };
 
             return (
@@ -100,18 +109,18 @@
                 >
                   <div className="flex items-start gap-3">
                     {hasChildren && (
-                      <div className="mt-1">
+                      <div className="mt-1 text-slate-300">
                         {isExpanded ? <ChevronDown /> : <ChevronRight />}
                       </div>
                     )}
                     {getStatusIcon()}
                     <div className="flex-1">
-                      <div className="font-semibold text-gray-800">{node.question}</div>
+                      <div className="font-semibold text-slate-100">{node.question}</div>
                       {node.explanation && (
-                        <div className="text-sm text-gray-600 mt-2">{node.explanation}</div>
+                        <div className="text-sm text-slate-300 mt-2">{node.explanation}</div>
                       )}
                       {node.conclusion && (
-                        <div className="text-sm font-medium text-gray-700 mt-2 p-2 bg-white rounded border border-gray-300">
+                        <div className="text-sm font-medium text-slate-200 mt-2 p-2 bg-slate-900 bg-opacity-50 rounded border border-slate-700">
                           {node.conclusion}
                         </div>
                       )}
@@ -119,7 +128,7 @@
                   </div>
                 </div>
                 {hasChildren && isExpanded && (
-                  <div className="border-l-2 border-gray-300 ml-3">
+                  <div className="border-l-2 border-slate-600 ml-3">
                     {node.children.map((child) => (
                       <TreeNode key={child.id} node={child} level={level + 1} />
                     ))}
@@ -584,52 +593,52 @@
           };
 
           return (
-            <div className="max-w-5xl mx-auto p-6 bg-white">
-              <div className="mb-8">
-                <h1 className="text-3xl font-bold text-gray-900 mb-4">
+            <div className="max-w-5xl mx-auto p-6">
+              <div className="mb-8 bg-slate-800 bg-opacity-60 backdrop-blur-sm p-6 rounded-xl border border-slate-600">
+                <h1 className="text-3xl font-bold text-slate-100 mb-4">
                   The Ex-Friendship Question: An Analytical Framework
                 </h1>
-                <p className="text-gray-700 mb-4">
+                <p className="text-slate-300 mb-4">
                   A logical examination of what maintaining friendship with an ex actually means—for you, for your ex, and for your current relationship. This isn't about judgment, but about understanding the structural realities and what your choices reveal about priorities.
                 </p>
-                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
-                  <p className="font-semibold text-blue-900">For Andres:</p>
-                  <p className="text-blue-800">
+                <div className="bg-blue-900 bg-opacity-30 border-l-4 border-blue-500 p-4 mb-4 rounded">
+                  <p className="font-semibold text-blue-300">For Andres:</p>
+                  <p className="text-blue-200">
                     This analysis is designed to help you think through the ex-friendship question logically. It examines the neuroscience, psychology, and practical realities—not to tell you what to do, but to help you understand what your choices mean and what they cost. The goal is clarity about what maintaining this friendship actually indicates and how it affects your current relationship.
                   </p>
                 </div>
-                <div className="bg-gray-50 border-l-4 border-gray-400 p-4">
-                  <p className="font-semibold text-gray-900">How to use this analysis:</p>
-                  <p className="text-gray-700">Click any section to expand the full reasoning. Follow the logical chain from neuroscience through practical implications to the choice you face. The conclusion emerges naturally from the evidence.</p>
+                <div className="bg-slate-700 bg-opacity-40 border-l-4 border-slate-500 p-4 rounded">
+                  <p className="font-semibold text-slate-200">How to use this analysis:</p>
+                  <p className="text-slate-300">Click any section to expand the full reasoning. Follow the logical chain from neuroscience through practical implications to the choice you face. The conclusion emerges naturally from the evidence.</p>
                 </div>
               </div>
 
               <TreeNode node={decisionTree} />
 
-              <div className="mt-8 p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border-2 border-blue-300">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">The Natural Conclusion</h2>
+              <div className="mt-8 p-6 bg-slate-800 bg-opacity-60 backdrop-blur-sm rounded-xl border border-slate-600">
+                <h2 className="text-2xl font-bold text-slate-100 mb-4">The Natural Conclusion</h2>
                 <div className="space-y-4">
-                  <div className="bg-white p-4 rounded-lg shadow-sm">
-                    <p className="font-bold text-blue-900 mb-2">What the evidence shows:</p>
-                    <p className="text-gray-800">Romantic relationships create neural encodings that don't simply "downgrade" to friendship. Every supposed ex-friendship serves a function beyond genuine friendship: grief avoidance, ego management, optionality, validation, convenience, or monitoring. These aren't friendship—they're unresolved emotional business.</p>
+                  <div className="bg-slate-900 bg-opacity-50 p-4 rounded-lg shadow-sm border border-slate-700">
+                    <p className="font-bold text-blue-300 mb-2">What the evidence shows:</p>
+                    <p className="text-slate-300">Romantic relationships create neural encodings that don't simply "downgrade" to friendship. Every supposed ex-friendship serves a function beyond genuine friendship: grief avoidance, ego management, optionality, validation, convenience, or monitoring. These aren't friendship—they're unresolved emotional business.</p>
                   </div>
-                  <div className="bg-white p-4 rounded-lg shadow-sm">
-                    <p className="font-bold text-blue-900 mb-2">What your current partner experiences:</p>
-                    <p className="text-gray-800">Your partner feels they're competing with historical intimacy they can't match. They experience comparison anxiety. They receive the message that your comfort with your past takes priority over their security in the present. They wonder if they're really your priority.</p>
+                  <div className="bg-slate-900 bg-opacity-50 p-4 rounded-lg shadow-sm border border-slate-700">
+                    <p className="font-bold text-blue-300 mb-2">What your current partner experiences:</p>
+                    <p className="text-slate-300">Your partner feels they're competing with historical intimacy they can't match. They experience comparison anxiety. They receive the message that your comfort with your past takes priority over their security in the present. They wonder if they're really your priority.</p>
                   </div>
-                  <div className="bg-white p-4 rounded-lg shadow-sm">
-                    <p className="font-bold text-blue-900 mb-2">What this decision tests:</p>
-                    <p className="text-gray-800">This is a litmus test for priorities, emotional availability, boundary health, conflict resolution, and future orientation. Your choice reveals whether you're building forward or maintaining anchors to the past.</p>
+                  <div className="bg-slate-900 bg-opacity-50 p-4 rounded-lg shadow-sm border border-slate-700">
+                    <p className="font-bold text-blue-300 mb-2">What this decision tests:</p>
+                    <p className="text-slate-300">This is a litmus test for priorities, emotional availability, boundary health, conflict resolution, and future orientation. Your choice reveals whether you're building forward or maintaining anchors to the past.</p>
                   </div>
-                  <div className="bg-blue-100 p-5 rounded-lg border-2 border-blue-400 mt-4">
-                    <p className="font-bold text-blue-900 text-lg mb-3">For Andres—The Choice Before You:</p>
-                    <p className="text-gray-900 mb-3">
+                  <div className="bg-blue-900 bg-opacity-30 p-5 rounded-lg border-2 border-blue-600 mt-4">
+                    <p className="font-bold text-blue-200 text-lg mb-3">For Andres—The Choice Before You:</p>
+                    <p className="text-slate-200 mb-3">
                       You can maintain your friendship with your ex. That's a valid choice. But understand what it signals: that this connection from your past is important enough to you that you're willing to ask your current partner to be uncomfortable with it.
                     </p>
-                    <p className="text-gray-900 mb-3">
+                    <p className="text-slate-200 mb-3">
                       Or you can choose to create distance. Not because someone is forcing you, but because you've thought through what maintaining this friendship actually means, what function it serves, and what it costs your current relationship.
                     </p>
-                    <p className="text-gray-900 font-semibold">
+                    <p className="text-slate-100 font-semibold">
                       The analysis suggests a clear answer: if you want to build the deepest possible trust and intimacy with your current partner, maintaining meaningful connection with your ex works against that goal. The question is whether that goal is your priority.
                     </p>
                   </div>
